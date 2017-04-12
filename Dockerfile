@@ -29,12 +29,17 @@ RUN export CP_SHA1=e886899467ced6d7c76027d58c7f7554c2fb2bcc \
 EXPOSE 8080
 ENTRYPOINT ["/bin/containerpilot", \
             "java", \
+            "-server", \
             "-XX:MaxRAM=128m", \
             "-XX:+UseSerialGC", \
             "-XX:MinHeapFreeRatio=20", \
             "-XX:MaxHeapFreeRatio=40", \
             "-XX:GCTimeRatio=4", \
             "-XX:AdaptiveSizePolicyWeight=90", \
+            "-XX:+ScavengeBeforeFullGC", \
+            "-XX:+CMSScavengeBeforeRemark", \
+            "-Dsun.net.inetaddr.ttl=60", \
+            "-Djava.awt.headless=true", \
             "-jar", \
             "/opt/echo.jar"]
 COPY build/libs/echo-0.0.0.RELEASE.jar /opt/echo.jar

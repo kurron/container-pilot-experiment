@@ -2,4 +2,8 @@ version: '2'
 services:
     container-pilot:
         build: .
-        network_mode: "host"
+        extra_hosts:
+            - "consul:192.168.1.227"
+        network_mode: "bridge"
+        ports:
+            - "8080"
