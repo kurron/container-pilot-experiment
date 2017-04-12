@@ -27,5 +27,14 @@ RUN export CP_SHA1=e886899467ced6d7c76027d58c7f7554c2fb2bcc \
 
 # Install application
 EXPOSE 8080
-ENTRYPOINT ["/bin/containerpilot", "java", "-jar", "/opt/echo.jar"]
+ENTRYPOINT ["/bin/containerpilot", \
+            "java", \
+            "-XX:MaxRAM=128m", \
+            "-XX:+UseSerialGC", \
+            "-XX:MinHeapFreeRatio=20", \
+            "-XX:MaxHeapFreeRatio=40", \
+            "-XX:GCTimeRatio=4", \
+            "-XX:AdaptiveSizePolicyWeight=90", \
+            "-jar", \
+            "/opt/echo.jar"]
 COPY build/libs/echo-0.0.0.RELEASE.jar /opt/echo.jar
