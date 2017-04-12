@@ -1,0 +1,45 @@
+{
+  "consul": "consul:8500",
+  "preStart": "/usr/local/bin/preStart-script.sh",
+  "logging": {
+    "level": "INFO",
+    "format": "default",
+    "output": "stdout"
+  },
+  "stopTimeout": 5,
+  "preStop": "/usr/local/bin/preStop-script.sh",
+  "postStop": "/usr/local/bin/postStop-script.sh",
+  "services": [
+    {
+      "name": "echo",
+      "port": 8080,
+      "health": [
+        "/usr/bin/curl",
+        "--fail",
+        "-s",
+        "http://localhost:8080/operations/health"
+        ],
+      "interfaces": [
+        "eth0",
+        "enp0s8",
+        "192.168.0.0/16"
+      ],
+      "poll": 10,
+      "ttl": 30,
+      "timeout": "10s",
+      "tags": ["tag1"]
+    }
+  ],
+  "backends": [
+  ],
+  "tasks": [
+    {
+      "name": "task",
+      "command": ["/usr/local/bin/task-script.sh","From Container Pilot"],
+      "frequency": "10000ms",
+      "timeout": "100ms"
+    }
+  ],
+  "coprocesses": [
+  ]
+}
