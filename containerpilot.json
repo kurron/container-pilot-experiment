@@ -27,7 +27,7 @@
       "poll": 10,
       "ttl": 30,
       "timeout": "10s",
-      "tags": ["tag1"]
+      "tags": ["production", "asgard"]
     }
   ],
   "backends": [

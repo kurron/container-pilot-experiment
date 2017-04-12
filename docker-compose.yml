@@ -2,8 +2,4 @@ version: '2'
 services:
     container-pilot:
         build: .
-        ports:
-        - "8080"
-        environment:
-            server_context-path: /echo
-            management_context-path: /operations
+        network_mode: "host"
